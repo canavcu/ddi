@@ -5,9 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.annotation.Annotation;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 
 //import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Controller;
@@ -18,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 //import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -102,30 +101,29 @@ public class Zemberek  {
 	  }
 	//value="demo"
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView handleRequest(HttpServletRequest request,
-			HttpServletResponse response,Model model) throws ServletException, IOException,
+	public ModelAndView handleRequest(@RequestParam("text") String mesg
+			,Model model) throws  IOException,
 			Exception {
 		 
 		  
 		String aMessage = "zemberrek!";
-		String textparm = (String) request.getParameter("text");
+		String textparm = mesg;
 
 		// String tab = (String)request.getParameter("submit") ;
 		// String attr = (String) request.getAttribute("text");
 		if (textparm != null && textparm != "") {
-			response.setCharacterEncoding("UTF-8");
-			request.setCharacterEncoding("UTF-8");
+//			response.setCharacterEncoding("UTF-8");
+//			request.setCharacterEncoding("UTF-8");
 			
 			model.addAttribute(new UploadItem());
-			aMessage = (String) request.getParameter("text");
+			aMessage = textparm;
 			ZemberekImp zem = new ZemberekImp(aMessage);
 			this.sonuc = zem.doIt();
 			aMessage = getSonuc();
 			modelAndView = new ModelAndView("zemberek");// zemberek ti
 			modelAndView.addObject("message", aMessage);
 		} else {
-			response.setCharacterEncoding("UTF-8");
-			request.setCharacterEncoding("UTF-8");
+			
 			model.addAttribute(new UploadItem());
 			modelAndView = new ModelAndView("zemberek");
 			modelAndView.addObject("message", aMessage);
