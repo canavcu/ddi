@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+
+#main_right{
+	position:absolute;
+	left:270px;
+}
+#main_left{
+	position:absolute;
+	top:20px;
+}
+#main{
+	position: relative;
+	margin-left:auto;
+	margin-right:auto;
+	width:945px;
+	background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 5px 5px 5px 5px;
+    padding: 10px 20px;
+    min-height:800px;
+    background: url('../images/BG_Forum_TopLinks_new.png') repeat-x scroll 0 0 #F1F1F1;
+	border: 0 solid;
+}
+#ma{
+	margin-left:auto;
+	margin-right:auto;
+	
+	min-height:400px;
+}
+body{
+	color: #3E3E3E;
+	min-width: 650px;
+    width: auto;
+   
+}
+html{
+	color: #000000;
+}
+h1{
+	position:absolute;
+	margin-left:auto;
+	margin-right:auto;
+}

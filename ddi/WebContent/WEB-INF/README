@@ -1,0 +1,3 @@
+1. zemeberegin türkçe karekter problemini aşmak için /.../tomcat.v.../conf/server.xml de connector tagı içine 
+URIEncoding="UTF-8" 
+eklemek gerekiyor. örneğin : <Connector connectionTimeout="20000" port="8080" protocol="HTTP/1.1" redirectPort="8443" URIEncoding="UTF-8"/> gibi.

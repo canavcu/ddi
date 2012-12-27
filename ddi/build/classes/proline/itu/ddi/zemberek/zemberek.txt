@@ -1,0 +1,23 @@
+//		else {
+//			ScriptEngine engine = new ScriptEngineManager().getEngineByName("javascript");
+//			 String script = "function tabselect2(){$( \"#tabs\" ).tabs( \"option\", \"selected\", 1 );}";  
+//			 modelAndView = new ModelAndView("zemberek");
+// 			modelAndView.addObject("message", aMessage);	      
+//			 try {
+//						engine.eval(script);
+//					} catch (ScriptException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//	               
+//		}
+
+
+//		Properties prop = new Properties();
+//		prop.load(new FileInputStream("zemberek.properties"));
+//      setPath(prop.getProperty("zemberekKokPath"));
+//      setAlfebePath(prop.getProperty("alfebe"));
+     
+//		Alfabe alfebe = new Alfabe(getAlfebePath(), "tr");
+//		KokOkuyucu okuyucu = new DuzYaziKokOkuyucu(getPath(), kodb, alfebe, );
+		

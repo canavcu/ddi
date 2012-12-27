@@ -1,0 +1,63 @@
+<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+  <property name="viewClass">
+    <value>org.springframework.web.servlet.view.tiles.TilesJstlView</value>
+  </property>
+</bean>
+<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass">
+			<value>
+				org.springframework.web.servlet.view.tiles2.TilesView
+			</value>
+		</property>
+	</bean>
+	
+	<filter>
+<filter-name>encodingFilter</filter-name>
+<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+<init-param>
+<param-name>encoding</param-name>
+<param-value>UTF-8</param-value>
+</init-param>
+<init-param>
+<param-name>forceEncoding</param-name>
+<param-value>true</param-value>
+</init-param>
+</filter>
+<filter-mapping>
+<filter-name>encodingFilter</filter-name>
+<url-pattern>/*</url-pattern>
+</filter-mapping>
+
+    <bean class="proline.itu.ddi.controller.UploadController"/>
+    
+ <bean  class="proline.itu.ddi.controller.FileUploadController">
+		<property name="formView" value="FileUploadForm" />
+		<property name="successView" value="FileUploadSuccess" />
+ 
+		<!-- Map a validator -->
+		<property name="validator">
+			<bean class="proline.itu.ddi.validator.FileUploadValidator" />
+		</property>
+	</bean>
+	
+	<bean name="/index.html" class="proline.itu.ddi.zemberek.HelloWorldController"/> 
+	<bean class="proline.itu.ddi.zemberek.Zemberek"/> 
+	
+	------------------
+		 <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <value>
+                /file.html=fileUploadController
+            </value>
+        </property>
+    </bean>
+
+    <bean id="fileUploadController" class="proline.itu.ddi.controller.FileUpload">
+        <property name="commandClass" value="proline.itu.ddi.model.FileUploadBean"/>
+        <property name="formView" value="fileuploadform"/>
+        <property name="successView" value="confirmation"/>
+    </bean>
+    
+    
+    
+    <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>

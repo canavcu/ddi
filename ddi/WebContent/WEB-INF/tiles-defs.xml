@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+	<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+	 "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+	 <definition name="ddiportal.homepage" template="/WEB-INF/layouts/home.jsp">
+	   <put-attribute  name="cssPath" value="./css/main.css" />
+	   <put-attribute name="title" value="Doğal Dil İşleme Portalı" />
+	   <put-attribute name="menu" value="/WEB-INF/tiles/left_menu.jsp" />
+	   <put-attribute name="header" value="" />
+       <put-attribute name="body" value="/WEB-INF/jsp/right_ana.jsp" />
+       <put-attribute name="footer" value="" />
+	 </definition>
+	 	<definition name="ddiportal.zemberek" extends="ddiportal.homepage">
+    		<put-attribute name="title" value="Zemberek" />
+    		<put-attribute name="body" value="/WEB-INF/jsp/zemberekBody.jsp" />
+		</definition>
+	 
+</tiles-definitions>
