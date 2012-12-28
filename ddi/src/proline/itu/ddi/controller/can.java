@@ -1,5 +1,5 @@
 package proline.itu.ddi.controller;
 
-public class acs {
+public interface can {
 
 }
