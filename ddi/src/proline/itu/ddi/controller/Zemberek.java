@@ -161,12 +161,5 @@ public class Zemberek  {
 		
 		return null;
 	}
-//	public UploadItem getUploaditem() {
-//		return uploadItem;
-//	}
-//
-//	public void setUploaditem(UploadItem uploaditem) {
-//		this.uploadItem = uploadItem;
-//	}
 
 }
