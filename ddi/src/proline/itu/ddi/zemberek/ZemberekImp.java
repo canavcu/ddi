@@ -10,6 +10,7 @@ import net.zemberek.erisim.Zemberek;
 import net.zemberek.tr.yapi.TurkiyeTurkcesi;
 import net.zemberek.yapi.Alfabe;
 import net.zemberek.yapi.Kelime;
+
 public class ZemberekImp {
 
 	private String path; 
@@ -18,6 +19,9 @@ public class ZemberekImp {
 	private String fullText; 
 	public Kelime[] sonuc;
 	private String c ="";
+	public String word = "";
+	public String[] kelimeDizisi ;
+
 	public  void main() throws Throwable {
 
 	}
@@ -29,7 +33,7 @@ public class ZemberekImp {
 
 		try {
 
-        	//setFullText("Protokolün yapısı son derece basittir.");
+        	//setFullText("ProtokolÃ¼n yapÄ±sÄ± son derece basittir.");
         	
 			InputStream fullTextInputStream = new ByteArrayInputStream(getFullText().getBytes("UTF-8"));
         	TurkishTokenStream token = new TurkishTokenStream(fullTextInputStream, "UTF-8");
@@ -47,8 +51,52 @@ public class ZemberekImp {
 		}
 		return this.c;
 	}
+	public String doZemAscii(){
+		
+		try {
+			InputStream fullTextInputStream = new ByteArrayInputStream(getFullText().getBytes("UTF-8"));
+        	TurkishTokenStream token = new TurkishTokenStream(fullTextInputStream, "UTF-8");
+			Zemberek z = new Zemberek(new TurkiyeTurkcesi());
+			String tok ;
+			while(( tok = token.nextWord()) != null){
+	        	word = z.asciiyeDonustur(tok);
+	        	c += word + " ";
+		        
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return this.c;
+	}
 
-
+	public String doZemDeAscii(){
+		int i=0;
+		
+		try {
+			InputStream fullTextInputStream = new ByteArrayInputStream(getFullText().getBytes("UTF-8"));
+        	TurkishTokenStream token = new TurkishTokenStream(fullTextInputStream, "UTF-8");
+			Zemberek z = new Zemberek(new TurkiyeTurkcesi());
+			String tok ;
+			
+			while(( tok = token.nextWord()) != null){
+	        	//i = z.asciidenTurkceye(tok).length;
+				i = 1;
+				kelimeDizisi = new String[i];	
+	        	for(int p = 0 ;p < i ; p++){
+	        		
+	        		kelimeDizisi[p] = z.asciidenTurkceye(tok)[p];
+	        		word += kelimeDizisi[p].toString() + " ";
+	        	}
+	        	//i = 0;
+			}
+			c = word;
+	        
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return this.c;
+	}
 	public String getFullText() {
 		return fullText;
 	}

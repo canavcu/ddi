@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 	<!DOCTYPE tiles-definitions PUBLIC
 	"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
 	 "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
@@ -15,5 +15,13 @@
     		<put-attribute name="title" value="Zemberek" />
     		<put-attribute name="body" value="/WEB-INF/jsp/zemberekBody.jsp" />
 		</definition>
+		<definition name="ddiportal.zemascii" extends="ddiportal.homepage">
+    		<put-attribute name="title" value="Zemberek iscii" />
+    		<put-attribute name="body" value="/WEB-INF/jsp/zemberekBodyAscii.jsp" />
+		</definition>
 	 
+	 <definition name="ddiportal.zemdeascii" extends="ddiportal.homepage">
+    		<put-attribute name="title" value="Zemberek deascii" />
+    		<put-attribute name="body" value="/WEB-INF/jsp/zemberekBodydeAscii.jsp" />
+		</definition>
 </tiles-definitions>

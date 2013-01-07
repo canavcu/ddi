@@ -7,6 +7,7 @@ import java.lang.annotation.Annotation;
 
 
 
+
 //import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,10 +28,8 @@ import proline.itu.ddi.model.UploadItem;
 import proline.itu.ddi.zemberek.File;
 import proline.itu.ddi.zemberek.ZemberekImp;
 
-
-
 @Controller
-@RequestMapping("/zemberek/*")
+@RequestMapping("/zemberek")
 public class Zemberek  {
 
 	private String sonuc;
@@ -41,19 +40,45 @@ public class Zemberek  {
 	public String file;
 	public String fileStr = "";
 	public String zemSonuc = "";
-	//value="demo"
-//	 @RequestMapping(method = RequestMethod.GET)
-//	  public String getUploadForm()
-//	  {
-//	   
-//	  }
-	@RequestMapping(value="out")
-	  public ModelAndView out(String zem) throws IOException
-	  { 
-		return new ModelAndView("out","message",zem);
-	  }
-	@SuppressWarnings("null")
-	@RequestMapping(method = RequestMethod.POST)
+	//public UploadItem uploadItem;
+	
+	
+	public Zemberek(){
+
+	}
+	
+
+	@RequestMapping(value="/zemberek", method = RequestMethod.GET)
+	public ModelAndView handleGetRequest(@RequestParam(value ="text" , required = false) String mesg, Model model) throws  IOException, Exception {
+
+		String aMessage = "zemberrek!";
+	
+		model.addAttribute(new UploadItem());
+		modelAndView = new ModelAndView("zemberek");
+		modelAndView.addObject("message", aMessage);
+
+		return modelAndView;
+	}
+
+	@RequestMapping(value="/zemberek/demo", method = RequestMethod.POST)
+	public ModelAndView handleDemoRequest(@RequestParam(value ="text" , required = false) String mesg, Model model) throws  IOException, Exception {
+
+		String aMessage = "zemberrek!";
+		String textparm = mesg;
+			
+			model.addAttribute(new UploadItem());
+			aMessage = textparm;
+			ZemberekImp zem = new ZemberekImp(aMessage);
+			this.sonuc = zem.doIt();
+			aMessage = getSonuc();
+			modelAndView = new ModelAndView("zemberek");
+			modelAndView.addObject("message", aMessage);
+		return modelAndView;
+	}
+	
+//value="/zemberek",
+	
+	@RequestMapping(value="/zemberek/out",method = RequestMethod.POST)
 	  public ModelAndView create(UploadItem uploadItem, BindingResult result) throws IOException
 	  {
 	    if (result.hasErrors())
@@ -62,7 +87,7 @@ public class Zemberek  {
 	      {
 	        System.err.println("Error: " + error.getCode() +  " - " + error.getDefaultMessage());
 	      }
-	     // return "/zemberek";
+	 
 	    }
 	    
 		MultipartFile multipartFile = uploadItem.getFileData();
@@ -91,7 +116,7 @@ public class Zemberek  {
                  return model;
          }
 
-	    // Some type of file processing...
+	
 	    System.err.println("-------------------------------------------");
 
 	    System.err.println("Test upload: " + uploadItem.getName());
@@ -100,62 +125,8 @@ public class Zemberek  {
 	 
 	    return new ModelAndView("out","message",fileName);
 	  }
-	//value="demo"
-	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView handleRequest(@RequestParam("text") String mesg
-			,Model model) throws  IOException,
-			Exception {
-		 
-		  
-		String aMessage = "zemberrek!";
-		String textparm = mesg;
 
-		// String tab = (String)request.getParameter("submit") ;
-		// String attr = (String) request.getAttribute("text");
-		if (textparm != null && textparm != "") {
-//			response.setCharacterEncoding("UTF-8");
-//			request.setCharacterEncoding("UTF-8");
-			
-			model.addAttribute(new UploadItem());
-			aMessage = textparm;
-			ZemberekImp zem = new ZemberekImp(aMessage);
-			this.sonuc = zem.doIt();
-			aMessage = getSonuc();
-			modelAndView = new ModelAndView("zemberek");// zemberek ti
-			modelAndView.addObject("message", aMessage);
-		} else {
-			
-			model.addAttribute(new UploadItem());
-			modelAndView = new ModelAndView("zemberek");
-			modelAndView.addObject("message", aMessage);
-		}
-		return modelAndView;
-	}//value="fileupload"
-//	@RequestMapping(method=RequestMethod.POST)
-//	public String onSubmit(UploadItem uploadItem, BindingResult result)
-//			throws ServletException, IOException {
-//		String can ="can";
-//		try {
-//			//FileUploadBean bean = (FileUploadBean) command;
-//			//byte[] file = bean.getFile();
-////			 if (file == null) {
-////	             // hmm, that's strange, the user did not upload anything
-////	        }
-//			//String textFile = (String) request.getParameter("file");
-//			//String fileSonuc;
-//			//ZemberekImp zem = new ZemberekImp(textFile);
-//			//setFileSonuc(zem.doIt());
-//			fileSonuc = getFileSonuc();
-//			movPost = new ModelAndView("zemberek");// zemberek ti
-//			movPost.addObject("message", can);
-//	
-//			//return super.onSubmit(request, response, command, errors);
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		return "zemberek";
-//	}
+	
 
 	public String getFileSonuc() {
 		return fileSonuc;
@@ -190,4 +161,12 @@ public class Zemberek  {
 		
 		return null;
 	}
+//	public UploadItem getUploaditem() {
+//		return uploadItem;
+//	}
+//
+//	public void setUploaditem(UploadItem uploaditem) {
+//		this.uploadItem = uploadItem;
+//	}
+
 }
