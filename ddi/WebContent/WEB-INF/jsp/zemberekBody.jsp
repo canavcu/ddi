@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <div id="tabs">
-<FORM action="zemberek" METHOD="POST" >
+<FORM action="zemberek/demo" METHOD="POST" >
        
     <ul>
         <li><a href="#tabs-1">Zemberek Demo</a></li>
@@ -15,12 +15,12 @@
             <div style="border: 0 solid; ">
             <textarea  NAME="text2" style="width: 100%; height: 100%; min-height:250px; min-width:400px;" >${message}</TEXTAREA></div></div>
    </FORM>
-   <form:form action="zemberek/out" modelAttribute="uploadItem" METHOD="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+   <form:form action="zemberek/out" modelAttribute="uploadItem" METHOD="POST" enctype="multipart/form-data">
    <fieldset>
     <div id="tabs-2" style="min-height:250px;min-width:600px;">
 		<label for="file">Dosya :</label>
 		
-		<form:input path="fileData" type="file" />
+		<form:input path="fileData" type="file"  />
 		<input type="submit" />
 		
        </div>

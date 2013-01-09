@@ -1,36 +1,31 @@
 package proline.itu.ddi.controller;
 
 ////UrlBasedViewResolver
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.annotation.Annotation;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletResponse;
 
 
 
-
-
-import org.apache.commons.io.IOUtils;
+//import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+//import org.springframework.ui.ModelMap;
+//import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
+//import org.springframework.web.bind.annotation.RequestMapping;
+//import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
+//import org.springframework.web.servlet.mvc.Controller;
 
 import proline.itu.ddi.model.UploadItem;
-import proline.itu.ddi.zemberek.Zem;
-import proline.itu.ddi.zemberek.ZemInput;
-import proline.itu.ddi.zemberek.ZemString;
+import proline.itu.ddi.zemberek.File;
 import proline.itu.ddi.zemberek.ZemberekImp;
 
 @Controller
@@ -65,7 +60,7 @@ public class Zemberek  {
 		return modelAndView;
 	}
 
-	@RequestMapping(value="/zemberek", method = RequestMethod.POST)
+	@RequestMapping(value="/zemberek/demo", method = RequestMethod.POST)
 	public ModelAndView handleDemoRequest(@RequestParam(value ="text" , required = false) String mesg, Model model) throws  IOException, Exception {
 
 		String aMessage = "zemberrek!";
@@ -73,10 +68,8 @@ public class Zemberek  {
 			
 			model.addAttribute(new UploadItem());
 			aMessage = textparm;
-			Zem zem = new ZemString(aMessage);
-            ZemberekImp zemImp = new ZemberekImp(zem.getInputStream());
-			
-			this.sonuc = zemImp.doIt();
+			ZemberekImp zem = new ZemberekImp(aMessage);
+			this.sonuc = zem.doIt();
 			aMessage = getSonuc();
 			modelAndView = new ModelAndView("zemberek");
 			modelAndView.addObject("message", aMessage);
@@ -86,17 +79,9 @@ public class Zemberek  {
 //value="/zemberek",
 	
 	@RequestMapping(value="/zemberek/out",method = RequestMethod.POST)
-	  public void create(UploadItem uploadItem, BindingResult result, HttpServletResponse  response ) throws IOException, ServletException
+	  public ModelAndView create(UploadItem uploadItem, BindingResult result) throws IOException
 	  {
-
-		long ikiMB = 2*1024*1024;
-		MultipartFile multipartFile = uploadItem.getFileData();
-		
-		//String fileName = "out.txt";
-        InputStream inputStream = null;
-	    InputStream outStream = null;
-        
-        if (result.hasErrors())
+	    if (result.hasErrors())
 	    {
 	      for(ObjectError error : result.getAllErrors())
 	      {
@@ -105,44 +90,30 @@ public class Zemberek  {
 	 
 	    }
 	    
-         if(multipartFile.getSize() > ikiMB)
-         {
-        	 //ModelAndView modelerr =  new ModelAndView("out","message",zemSonuc);
-        	 System.err.println("Error: file size can not be bigger than 2 MB... ");
-        	 return;
-         }
-         
-         
+		MultipartFile multipartFile = uploadItem.getFileData();
+		 String fileName = null;
+         InputStream inputStream = null;
+     
          if (multipartFile.getSize() > 0) {
                  inputStream = multipartFile.getInputStream();
-                // multipartFile.
-                    
-              
+                
+                 if (multipartFile.getSize() > 10000) {
+                         System.out.println("File Size:" + multipartFile.getSize());
+                         return new ModelAndView("zemberek","message",zemSonuc);
+                 }
                  System.out.println("size::" + multipartFile.getSize());
                 
                
                  System.out.println("fileName:" + multipartFile.getOriginalFilename());
-//                 File fileoku = new File(inputStream);
-//                 fileStr = fileoku.Read();
-                 Zem zem = new ZemInput(inputStream);
-                 ZemberekImp zemImp = new ZemberekImp(zem.getInputStream());
-                 zemSonuc = zemImp.doIt();
-                 outStream = new ByteArrayInputStream( zemSonuc.getBytes("UTF-8"));
+                 File fileoku = new File(inputStream);
+                 fileStr = fileoku.Read();
+                 ZemberekImp zem = new ZemberekImp(fileStr);
+                 zemSonuc = zem.doIt();
                  //System.out.println(zemSonuc);
                 // out(zemSonuc);
-                 //ModelAndView model =  new ModelAndView("out","message",zemSonuc);
-                 response.reset();
-                 response.setContentType("text/plain; charset=UTF-8");
-                 response.setCharacterEncoding("UTF-8");
-                 response.encodeURL("UTF-8");
-               
-                 response.setHeader("Content-Disposition", "attachment;filename=out.txt");
-                 IOUtils.copy(outStream, response.getOutputStream());//getOutputStream()
-                 
-                 response.flushBuffer();
+                 ModelAndView model =  new ModelAndView("out","message",zemSonuc);
                  inputStream.close();
-                 
-                 //return model;
+                 return model;
          }
 
 	
@@ -152,7 +123,7 @@ public class Zemberek  {
 	    System.err.println("Test upload: " + uploadItem.getFileData().getOriginalFilename());
 	    System.err.println("-------------------------------------------");
 	 
-	   // return new ModelAndView("out","message",fileName);
+	    return new ModelAndView("out","message",fileName);
 	  }
 
 	
