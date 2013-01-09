@@ -23,14 +23,14 @@
 				</li>
 			</ul>
 		</li>
-		<li class="expandable"><a href="#"><strong>BiÃ§imbilimsel ÃÃ¶zÃ¼mleyiciler</strong></a>
+		<li class="expandable"><a href="#"><strong>Biçimbilimsel Çözümleyiciler</strong></a>
 			<ul>
-				<li><a href="./jsp/morfKO.jsp">Kemal O. M.Ã.</a></li>
+				<li><a href="./jsp/morfKO.jsp">Kemal O. M.A.</a></li>
 				<li><a href="/ddi/zemberek">Zemberek</a></li>
-				<li><a href="/jsp/morfHS.jsp">HaÅim S. M.Ã.</a></li>
+				<li><a href="/jsp/morfHS.jsp">Haşim S. M.A.</a></li>
 			</ul></li>
 
-		<li class="last"><a href="#"><strong>BiÃ§imbilimsel
+		<li class="last"><a href="#"><strong>Biçimbilimsel
 					Belirsizlik Gidericiler</strong></a>
 			<ul>
 				<li><a href="./jsp/disbgD.jsp">Deniz</a></li>
