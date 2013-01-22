@@ -28,6 +28,9 @@
 	
 	<mvc:resources mapping="/zemberek/css/**" location="/css/"/>
 	
+	<bean id="fileValidator" class="proline.itu.ddi.validator.FileValidator">
+		
+	</bean>
 	
 	
 	<bean id="viewResolver"	class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
@@ -52,7 +55,7 @@
     </bean>
     	
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-		<property name="basename" value="message" />
+		<property name="basename" value="messages" />
 	</bean>
 	
 	<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>

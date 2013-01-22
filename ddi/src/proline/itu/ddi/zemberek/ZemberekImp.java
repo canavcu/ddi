@@ -51,8 +51,8 @@ public class ZemberekImp {
 	public String doZemAscii(){
 		
 		try {
-			InputStream fullTextInputStream = new ByteArrayInputStream(getFullText().getBytes("UTF-8"));
-        	TurkishTokenStream token = new TurkishTokenStream(fullTextInputStream, "UTF-8");
+			//InputStream fullTextInputStream = new ByteArrayInputStream(getFullText().getBytes("UTF-8"));
+        	TurkishTokenStream token = new TurkishTokenStream(getInputStrm(), "UTF-8");
 			Zemberek z = new Zemberek(new TurkiyeTurkcesi());
 			String tok ;
 			while(( tok = token.nextWord()) != null){
@@ -70,8 +70,8 @@ public class ZemberekImp {
 		int i=0;
 		
 		try {
-			InputStream fullTextInputStream = new ByteArrayInputStream(getFullText().getBytes("UTF-8"));
-        	TurkishTokenStream token = new TurkishTokenStream(fullTextInputStream, "UTF-8");
+			//InputStream fullTextInputStream = new ByteArrayInputStream(getFullText().getBytes("UTF-8"));
+        	TurkishTokenStream token = new TurkishTokenStream(getInputStrm(), "UTF-8");
 			Zemberek z = new Zemberek(new TurkiyeTurkcesi());
 			String tok ;
 			
